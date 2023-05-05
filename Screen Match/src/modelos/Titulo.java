@@ -54,7 +54,7 @@ public class Titulo implements Comparable<Titulo>{
         }
     
         public void exibeFichaTecnica(){
-            System.out.println("Nome do filmes: " + nome);
+            System.out.println("Nome do filme: " + nome);
             System.out.println("Ano de lançamento: " + anoDeLancamento);
         }
     
