@@ -68,7 +68,7 @@ public static void main(String[] args) {
     listaDeFilmes.add(outroFilme);
 
     System.out.println("Tamanho da lista: " + listaDeFilmes.size());
-    System.out.println("Primeiro filme: " + listaDeFilmes.get(0).getNome());
+    System.out.println("Primeiro filmes: " + listaDeFilmes.get(0).getNome());
     System.out.println(listaDeFilmes);
     System.out.println("toString do filme: " + listaDeFilmes);
 
