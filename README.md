@@ -1,3 +1,1 @@
-<h1>Estudos - Java - Orientação a Objetos</h1>
-
-Parte dos estudos de Java
+<h1>Estudos de Java</h1>
