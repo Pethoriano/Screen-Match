@@ -28,7 +28,7 @@ public class PrincipalComBusca {
          .send(request, BodyHandlers.ofString());
     var json = response.body();
     System.out.println(json);
-
+    
     Gson gson = new Gson();
     Titulo meuTitulo = gson.fromJson(json, Titulo.class);
     System.out.println(meuTitulo);
