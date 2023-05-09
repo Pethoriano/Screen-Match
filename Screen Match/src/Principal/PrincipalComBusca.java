@@ -8,6 +8,10 @@ import java.net.http.HttpResponse;
 import java.net.http.HttpResponse.BodyHandlers;
 import java.util.Scanner;
 
+import com.google.gson.Gson;
+
+import modelos.Titulo;
+
 public class PrincipalComBusca {
     public static void main(String[] args) throws IOException, InterruptedException {
         Scanner leitura = new Scanner(System.in);
@@ -22,6 +26,12 @@ public class PrincipalComBusca {
          .build();
     HttpResponse<String> response = client
          .send(request, BodyHandlers.ofString());
-    System.out.println(response.body());
+    var json = response.body();
+    System.out.println(json);
+
+    Gson gson = new Gson();
+    Titulo meuTitulo = gson.fromJson(json, Titulo.class);
+    System.out.println(meuTitulo);
+
     }
 }
