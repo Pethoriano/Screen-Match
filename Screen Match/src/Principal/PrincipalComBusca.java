@@ -6,6 +6,7 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.net.http.HttpResponse.BodyHandlers;
+import java.util.IllegalFormatException;
 import java.util.Scanner;
 
 import com.google.gson.FieldNamingPolicy;
@@ -22,27 +23,28 @@ public class PrincipalComBusca {
         var busca = leitura.nextLine();
 
         var endereco = "http://www.omdbapi.com/?t=" + busca + "&apikey=3febb1a2";
-
-        HttpClient client = HttpClient.newHttpClient();
-        HttpRequest request = HttpRequest.newBuilder()
-         .uri(URI.create(endereco))
-         .build();
-    HttpResponse<String> response = client
-         .send(request, BodyHandlers.ofString());
-    var json = response.body();
-    System.out.println(json);
-    
-    Gson gson = new GsonBuilder().setFieldNamingPolicy(FieldNamingPolicy.UPPER_CAMEL_CASE).create();
-    TituloOmdb meuTituloOmdb = gson.fromJson(json, TituloOmdb.class);
-    System.out.println(meuTituloOmdb);
-
         try {
+            HttpClient client = HttpClient.newHttpClient();
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(URI.create(endereco))
+                    .build();
+            HttpResponse<String> response = client
+                    .send(request, BodyHandlers.ofString());
+            var json = response.body();
+            System.out.println(json);
+
+            Gson gson = new GsonBuilder().setFieldNamingPolicy(FieldNamingPolicy.UPPER_CAMEL_CASE).create();
+            TituloOmdb meuTituloOmdb = gson.fromJson(json, TituloOmdb.class);
+            System.out.println(meuTituloOmdb);
+
+            // try {
             Titulo meuTitulo = new Titulo(meuTituloOmdb);
-            System.out.println(meuTitulo);        
-        } catch (Exception e) {
-            System.out.println("Um erro correu: " + e.getMessage());
+            System.out.println(meuTitulo);
+        } catch (NumberFormatException e) {
+            System.out.println("Um erro ocorreu: " + e.getMessage());
+        } catch (IllegalFormatException e){
+            System.out.println("Ao buscar ocorreu um erro no nome do filme");
         }
 
-    
     }
 }
