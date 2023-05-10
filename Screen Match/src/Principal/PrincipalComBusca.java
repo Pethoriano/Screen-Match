@@ -13,6 +13,7 @@ import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import exception.ErroDeConversaoDeAnoException;
 import modelos.Titulo;
 import modelos.TituloOmdb;
 
@@ -22,7 +23,7 @@ public class PrincipalComBusca {
         System.out.println("Por favor, digite o nome de um filme:");
         var busca = leitura.nextLine();
 
-        var endereco = "http://www.omdbapi.com/?t=" + busca + "&apikey=3febb1a2";
+        var endereco = "http://www.omdbapi.com/?t=" + busca.replace(" ", "+") + "&apikey=3febb1a2";
         try {
             HttpClient client = HttpClient.newHttpClient();
             HttpRequest request = HttpRequest.newBuilder()
@@ -43,7 +44,9 @@ public class PrincipalComBusca {
         } catch (NumberFormatException e) {
             System.out.println("Um erro ocorreu: " + e.getMessage());
         } catch (IllegalFormatException e){
-            System.out.println("Ao buscar ocorreu um erro no nome do filme");
+            System.out.println("Ao buscar ocorreu um erro no nome do filme.");
+        } catch (ErroDeConversaoDeAnoException e) {
+            System.out.println(e.getMessage());
         }
 
     }
