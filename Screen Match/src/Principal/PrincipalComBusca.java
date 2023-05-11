@@ -1,5 +1,6 @@
 package Principal;
 
+import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -40,6 +41,11 @@ public class PrincipalComBusca {
 
             // try {
             Titulo meuTitulo = new Titulo(meuTituloOmdb);
+
+            FileWriter escrita = new FileWriter("filmes.txt");
+            escrita.write(meuTitulo.toString());
+            escrita.close();
+
             System.out.println(meuTitulo);
         } catch (NumberFormatException e) {
             System.out.println("Um erro ocorreu: " + e.getMessage());
